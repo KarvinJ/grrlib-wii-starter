@@ -28,9 +28,6 @@ int main(int argc, char **argv)
     // Initialise the Graphics & Video subsystem
     GRRLIB_Init();
 
-    // Initialise the Wiimotes
-    WPAD_Init();
-
     Rectangle bounds = {0, 0, 64, 64};
 
     const int SCREEN_WIDHT = 640;
@@ -45,14 +42,17 @@ int main(int argc, char **argv)
     //To indicate the font region to load.
     GRRLIB_InitTileSet(tex_BMfont2, 16, 16, 32);
 
+    // Initialise the Wiimotes
+    WPAD_Init();
+
     // Loop forever
     while (1)
     {
         WPAD_SetVRes(0, SCREEN_WIDHT, SCREEN_HEIGHT);
         WPAD_ScanPads(); // Scan the Wiimotes
 
-        const u32 wpaddown = WPAD_ButtonsDown(0);
-        const u32 wpadheld = WPAD_ButtonsHeld(0);
+        const u32 padDown = WPAD_ButtonsDown(0);
+        const u32 padHeld = WPAD_ButtonsHeld(0);
 
         GRRLIB_FillScreen(GRRLIB_BLACK); // Clear the screen
 
@@ -63,23 +63,23 @@ int main(int argc, char **argv)
         //  GRRLIB_DrawImg(10, 50, tex_test_jpg, 0, 1, 1, GRRLIB_WHITE);
 
         // If [HOME] was pressed on the first Wiimote, break out of the loop
-        if (wpaddown & WPAD_BUTTON_HOME)
+        if (padDown & WPAD_BUTTON_HOME)
         {
             break;
         }
-        if (wpadheld & WPAD_BUTTON_LEFT && bounds.x > 0)
+        if (padHeld & WPAD_BUTTON_LEFT && bounds.x > 0)
         {
             bounds.x -= SPEED;
         }
-        if (wpadheld & WPAD_BUTTON_RIGHT && bounds.x < SCREEN_WIDHT - bounds.w)
+        if (padHeld & WPAD_BUTTON_RIGHT && bounds.x < SCREEN_WIDHT - bounds.w)
         {
             bounds.x += SPEED;
         }
-        if (wpadheld & WPAD_BUTTON_UP && bounds.y > 0)
+        if (padHeld & WPAD_BUTTON_UP && bounds.y > 0)
         {
             bounds.y -= SPEED;
         }
-        if (wpadheld & WPAD_BUTTON_DOWN && bounds.y < SCREEN_HEIGHT - bounds.h)
+        if (padHeld & WPAD_BUTTON_DOWN && bounds.y < SCREEN_HEIGHT - bounds.h)
         {
             bounds.y += SPEED;
         }
@@ -93,7 +93,8 @@ int main(int argc, char **argv)
         GRRLIB_Render(); // Render the frame buffer to the TV
     }
 
-    GRRLIB_Exit(); // Be a good boy, clear the memory allocated by GRRLIB
+    GRRLIB_FreeTexture(tex_BMfont2); // Be a good boy, clear the memory allocated by GRRLIB
 
+    GRRLIB_Exit(); 
     exit(0); // Use exit() to exit a program, do not use 'return' from main()
 }
