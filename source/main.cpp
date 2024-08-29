@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
     Rectangle bounds = {0, 0, 64, 64, WHITE};
 
-    const int SCREEN_WIDHT = 640;
+    const int SCREEN_WIDTH = 640;
     const int SCREEN_HEIGHT = 480;
     const int SPEED = 10;
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     // Loop forever
     while (true)
     {
-        WPAD_SetVRes(0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        WPAD_SetVRes(0, SCREEN_WIDTH, SCREEN_HEIGHT);
         WPAD_ScanPads(); // Scan the Wiimotes
 
         const u32 padDown = WPAD_ButtonsDown(0);
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
         {
             bounds.x -= SPEED;
         }
-        if (padHeld & WPAD_BUTTON_RIGHT && bounds.x < SCREEN_WIDHT - bounds.w)
+        if (padHeld & WPAD_BUTTON_RIGHT && bounds.x < SCREEN_WIDTH - bounds.w)
         {
             bounds.x += SPEED;
         }
