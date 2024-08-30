@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 
         const u32 padDown = WPAD_ButtonsDown(0);
 
-        // If a was pressed on the first Wiimote, break out of the loop
+        // If HOME was pressed on the first Wiimote, break out of the loop
         if (padDown & WPAD_BUTTON_HOME)
         {
             break;
