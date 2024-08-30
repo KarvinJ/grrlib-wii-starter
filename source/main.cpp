@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <wiiuse/wpad.h>
 #include "BMfont3_png.h"
-// #include "alien_1_png.h"
+#include "alien_1_png.h"
 #include "test_jpg_jpg.h"
 
 #define BLACK 0x000000FF
@@ -58,8 +58,8 @@ int main(int argc, char **argv)
     // Initialise the Graphics & Video subsystem
     GRRLIB_Init();
 
-    // loading images jpg
-    // GRRLIB_texImg *tex_test_jpg = GRRLIB_LoadTexture(test_jpg_jpg);
+    // loading images png
+    // GRRLIB_texImg *alien = GRRLIB_LoadTexturePNG(alien_1_png);
 
     // loading fonts
     GRRLIB_texImg *tex_BMfont3 = GRRLIB_LoadTexture(BMfont3_png);
@@ -106,8 +106,8 @@ int main(int argc, char **argv)
             GRRLIB_Printf(150, 20, tex_BMfont3, WHITE, 1, "GAME PAUSED");
         }
 
-        // Draw jpg img
-        //  GRRLIB_DrawImg(10, 50, tex_test_jpg, 0, 1, 1, WHITE);
+        // Draw a img
+        // GRRLIB_DrawImg(10, 50, alien, 0, 1, 1, WHITE);
 
         GRRLIB_Rectangle(bounds.x, bounds.y, bounds.w, bounds.h, bounds.color, 1);
 
