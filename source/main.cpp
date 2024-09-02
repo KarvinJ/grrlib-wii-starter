@@ -8,8 +8,6 @@
 
 #define BLACK 0x000000FF
 #define WHITE 0xFFFFFFFF
-#define GREEN 0x008000FF
-#define YELLOW 0xFFFF00FF
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -104,6 +102,7 @@ int main(int argc, char **argv)
         // displaying text with the loaded fonts.
         if (isGamePaused)
         {
+            // Any text has to be written in uppercase if not it doesn't work.
             GRRLIB_Printf(150, 20, tex_BMfont3, WHITE, 1, "GAME PAUSED");
         }
 
