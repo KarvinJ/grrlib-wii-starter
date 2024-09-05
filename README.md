@@ -1,6 +1,6 @@
 # GRRLIB WII STARTER
 
-A Very simple Nintendo WII STARTER.
+A Very simple Nintendo WII GRRLIB starter template.
 
 # Building
 
