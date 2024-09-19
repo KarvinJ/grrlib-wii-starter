@@ -1,10 +1,9 @@
 #include <grrlib.h>
-#include <stdlib.h>
 #include <iostream>
 #include <wiiuse/wpad.h>
 #include "BMfont3_png.h"
-#include "alien_png.h"
-#include "test_jpg_jpg.h"
+// #include "alien_png.h"
+// #include "test_jpg_jpg.h"
 
 #define BLACK 0x000000FF
 #define WHITE 0xFFFFFFFF
@@ -27,9 +26,9 @@ typedef struct
     unsigned int color;
 } Rectangle;
 
-Rectangle player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 32, 64, 64, WHITE};
+Rectangle player = {SCREEN_WIDTH / 2 - 32, SCREEN_HEIGHT / 2 - 32, 64, 64, WHITE};
 
-Rectangle ball = {SCREEN_WIDTH / 2 - 32, SCREEN_HEIGHT / 2 - 32, 32, 32, WHITE};
+Rectangle ball = {SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT / 2 - 32, 32, 32, WHITE};
 
 int ballVelocityX = 4;
 int ballVelocityY = 4;
@@ -101,13 +100,13 @@ int main(int argc, char **argv)
 
     // loading images png
     // It fails, but I don't know why
-    GRRLIB_texImg *alien = GRRLIB_LoadTexturePNG(alien_png);
+    // GRRLIB_texImg *alien = GRRLIB_LoadTexturePNG(alien_png);
 
     // loading fonts
-    GRRLIB_texImg *tex_BMfont3 = GRRLIB_LoadTexture(BMfont3_png);
+    GRRLIB_texImg *blueFonts = GRRLIB_LoadTexture(BMfont3_png);
 
     // To indicate the font region to load.
-    GRRLIB_InitTileSet(tex_BMfont3, 32, 32, 32);
+    GRRLIB_InitTileSet(blueFonts, 32, 32, 32);
 
     // Initialise the Wiimotes
     WPAD_Init();
@@ -143,7 +142,7 @@ int main(int argc, char **argv)
         // ---------------------------------------------------------------------
 
         // Draw a img
-        GRRLIB_DrawImg(10, 50, alien, 0, 1, 1, WHITE);
+        // GRRLIB_DrawImg(10, 50, alien, 0, 1, 1, WHITE);
 
         GRRLIB_Rectangle(player.x, player.y, player.w, player.h, player.color, 1);
         GRRLIB_Rectangle(ball.x, ball.y, ball.w, ball.h, ball.color, 1);
@@ -152,17 +151,17 @@ int main(int argc, char **argv)
         if (isGamePaused)
         {
             // Any text has to be written in uppercase if not it doesn't work.
-            GRRLIB_Printf(170, 100, tex_BMfont3, WHITE, 1, "GAME PAUSED");
+            GRRLIB_Printf(150, 100, blueFonts, WHITE, 1, "GAME PAUSED");
         }
 
         std::string scoreString = "SCORE: " + std::to_string(score);
 
-        GRRLIB_Printf(170, 20, tex_BMfont3, WHITE, 1, scoreString.c_str());
+        GRRLIB_Printf(185, 20, blueFonts, WHITE, 1, scoreString.c_str());
 
         GRRLIB_Render(); // Render the frame buffer to the TV
     }
 
-    GRRLIB_FreeTexture(tex_BMfont3); // Be a good boy, clear the memory allocated by GRRLIB
+    GRRLIB_FreeTexture(blueFonts); // Be a good boy, clear the memory allocated by GRRLIB
 
     GRRLIB_Exit();
     exit(0); // Use exit() to exit a program, do not use 'return' from main()
