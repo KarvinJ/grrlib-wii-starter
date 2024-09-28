@@ -43,7 +43,7 @@ bool hasCollision(Rectangle &bounds, Rectangle &ball)
 
 void update()
 {
-    const u32 padHeld = WPAD_ButtonsHeld(0);
+    int padHeld = WPAD_ButtonsHeld(0);
 
     if (padHeld & WPAD_BUTTON_LEFT && player.x > 0)
     {
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
         WPAD_SetVRes(0, SCREEN_WIDTH, SCREEN_HEIGHT);
         WPAD_ScanPads(); // Scan the Wiimotes
 
-        const u32 padDown = WPAD_ButtonsDown(0);
+        int padDown = WPAD_ButtonsDown(0);
 
         // If HOME was pressed on the first Wiimote, break out of the loop
         if (padDown & WPAD_BUTTON_HOME)
