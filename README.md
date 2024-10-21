@@ -16,8 +16,7 @@ I built everything using Windows 10
 
 * Follow GRRLIB Repo instruction for the installation.
 
-* Clone this repo:  
-  `git clone https://github.com/ArkhamKnightXD/grrlib-wii-starter.git`
+* Clone this repo
 
-* `grrlib-wii-starter`
+* `cd grrlib-wii-starter`
 * `make`
